@@ -6,6 +6,7 @@ public class PlayerControllerX : MonoBehaviour
 {
     public bool gameOver;
 
+    public float topBound = 15f;
     public float floatForce;
     private float gravityModifier = 1.5f;
     private Rigidbody playerRb;
@@ -38,6 +39,12 @@ public class PlayerControllerX : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && !gameOver)
         {
             playerRb.AddForce(Vector3.up * floatForce, ForceMode.Impulse);
+        }
+
+        if (transform.position.y > topBound)
+        {
+            transform.position = new Vector3(transform.position.x, topBound, transform.position.z);
+            playerRb.AddForce(Vector3.down * 5, ForceMode.Impulse);
         }
     }
 
